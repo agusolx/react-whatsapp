@@ -1,10 +1,7 @@
 function saveData(data) {
   let number = data.to.replace("@c.us","")
   let pesan = data.body
-  
-  
-  pesan.includes("referensi")
-  
+
   if(!data.fromMe){
     saveMessage(data)
     }
@@ -17,6 +14,7 @@ function saveMessage(message){
   let data = ws.getRange(1,1,ws.getLastRow(),).getValues()
   const lastRow = ws.getLastRow()
   
+  let pesan = message.body
   let number = message.from.replace("@c.us","")
   let row
   let cek = data.filter((n,i)=>{
@@ -27,7 +25,21 @@ function saveMessage(message){
     return row
     }
   })
-  
-  ws.appendRow([message.from,message.body])
+  console.log(row)
 
+  //last message
+  if(row){
+  ws.getRange(row, 6).setValue(message.body)
+  ws.getRange(row, 7).setValue(new Date())
+  }
+  //keyword (referensi)
+  if(row && pesan.toString().toLowerCase().includes("referensi")){
+  ws.getRange(row, 4).setValue(message.body)
+  ws.getRange(row, 5).setValue(new Date())
+  
+  }
+  //first message
+  if(!row){
+  ws.appendRow([number,message.body,new Date()])
+  }
 }

@@ -1,7 +1,7 @@
-let urls ="https://ossified-dynamic-dry.glitch.me/"
+let url ="https://ossified-dynamic-dry.glitch.me/"
 
 function myFunction() {
-let contacts = UrlFetchApp.fetch(urls+"/contacts").getContentText()
+let contacts = UrlFetchApp.fetch(url+"/contacts").getContentText()
 let contact = JSON.parse(contacts)
 let data = []
 contact.forEach((c,i)=>{

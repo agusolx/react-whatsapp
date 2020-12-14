@@ -10,7 +10,6 @@
     />
     <link rel="stylesheet" type="text/css" href="main.css" />
  <script src="https://cdnjs.cloudflare.com/ajax/libs/socket.io/3.0.1/socket.io.js"></script>
- <script src="https://ossified-dynamic-dry.glitch.me/socket.io/socket.io.js"></script>
   </head>
   <script type="module">
     import {
@@ -21,7 +20,7 @@
       useRef
     } from "https://unpkg.com/htm/preact/standalone.module.js";
 
-    const url = 'https://ossified-dynamic-dry.glitch.me/'
+    const url = '<?= url ?>'
     const socket = io.connect(url, {transports: ['websocket', 'polling', 'flashsocket']});
 
     const App = () => {
@@ -51,7 +50,7 @@
       }
       
       function shoot(msg) {
-  alert(msg.body);
+  
 }
       
       useEffect(() => {

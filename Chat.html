@@ -19,7 +19,7 @@
       useEffect,
       useRef
     } from "https://unpkg.com/htm/preact/standalone.module.js";
-    const url = "<?= urls ?>"
+    const url = "<?= url ?>"
     console.log(url)
     const socket = io.connect(url, {transports: ['websocket', 'polling', 'flashsocket']});
 
@@ -287,7 +287,7 @@
       const fetchImage = function(m) {
         if (m.type != "image") return "";
 
-        const [urls, setUrl] = useState("");
+        const [url, setUrl] = useState("");
 
         useEffect(() => {
           fetch(url + "/getimage/" + selectedChat.id.user + "/" + m.id.id)
@@ -296,7 +296,7 @@
         }, []);
 
         return html`
-          <img src="data:image/jpg;base64,${urls}" alt="${m.id.id}" />
+          <img src="data:image/jpg;base64,${url}" alt="${m.id.id}" />
         `;
       };
 
