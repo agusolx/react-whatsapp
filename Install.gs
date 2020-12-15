@@ -9,6 +9,7 @@ function onOpen() {
 }
 
 const start = () => {
+  checkConnection()
   const triggers = ScriptApp.getProjectTriggers();
   for (var i = 0; i < triggers.length; i++) {
     ScriptApp.deleteTrigger(triggers[i]);
