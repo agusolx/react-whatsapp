@@ -7,35 +7,16 @@ function doGet(e) {
       .setXFrameOptionsMode(HtmlService.XFrameOptionsMode.ALLOWALL);
 }
 
-const doPost = (request = {}) => {
-  const { parameter, postData: { contents, type } = {} } = request;
-  const { name, country } = JSON.parse(contents);
-  if (parameter.action === 'getCountry') {
-    return ContentService.createTextOutput(country);
-  } else {
-    return ContentService.createTextOutput(name);
+function doPost(e){
+  const body = e.postData.contents
+  const bodyJson = JSON.parse(body);
+
+  try{
+    saveMessage(bodyJson)
+  }catch(e){
+//  SpreadsheetApp.getUi().alert(e.message)
   }
-};
+  
 
-const makeHttpPostRequest = () => {
-  const url = ScriptApp.getService().getUrl() + '?action=getCountrdy';
+}
 
-  const payload = {
-    name: 'Amit Agarwal',
-    blog: 'www.labnol.org',
-    country: 'India',
-  };
-
-  const options = {
-    method: 'POST',
-    followRedirects: true,
-    muteHttpExceptions: true,
-    payload: JSON.stringify(payload),
-  };
-
-  const response = UrlFetchApp.fetch(url, options);
-  if (response.getResponseCode() == 200) {
-    Logger.log(response.getContentText());
-  }
-  console.log(response.getResponseCode())
-};
