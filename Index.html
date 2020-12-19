@@ -36,7 +36,7 @@
         fetch(url+'/status')
           .then(res => res.json())
           .then(data => {
-          console.log(data)
+          
           setStrClient(data.response)
             if (data.response === "CONNECTED") {
               setConnected(true);
@@ -60,14 +60,19 @@
         });
 
         socket.on("message", data => {
-        console.log(data)
+        
+        google.script.run.withSuccessHandler((chat)=>{console.log(chat)
+//          bot(chat)
+          })
+            .withFailureHandler((e)=>{console.log(e)})
+            .saveData(data)
         });
 
         socket.on("message_read", data => {});
         
         socket.on("change_state",data =>{
           
-          console.log(data)
+          
           if (data === "CONNECTED"){
             setStrClient(data);
             setConnected(true);
@@ -95,6 +100,7 @@
         });
 
         socket.on("qr", data => {
+        console.log(data)
           fetchChats()
           setStrQR(data);
           setLoading(false);

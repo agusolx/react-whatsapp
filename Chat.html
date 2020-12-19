@@ -21,7 +21,7 @@
     } from "https://unpkg.com/htm/preact/standalone.module.js";
     const url = "<?= url ?>"
     console.log(url)
-    const socket = io.connect(url, {transports: ['websocket', 'polling', 'flashsocket']});
+    const socket = io.connect(url, {transports: ['polling', 'flashsocket']});
 
     const App = () => {
       const [isLoading, setLoading] = useState(true);
@@ -55,7 +55,7 @@
         fetch(url +"/status")
           .then(res => res.json())
           .then(data => {
-          console.log(data)
+          
           setStrClient(data.response)
             if (data.response === "CONNECTED") {
               setConnected(true);
@@ -136,11 +136,12 @@
             fetchChats();
           }
           if (data === "UNPAIRED") {
-            console.log(data);
+            ;
           }
         });
 
         socket.on("qr", data => {
+        console.log(data)
           setLoading(false)
           setStrQR(data);
           

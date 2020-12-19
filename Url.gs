@@ -1,4 +1,4 @@
-let url ="https://ossified-dynamic-dry.glitch.me/"
+let url ="https://whats-sheet.herokuapp.com"
 
 function myFunction() {
 let contacts = UrlFetchApp.fetch(url+"/contacts").getContentText()
@@ -10,7 +10,7 @@ data.push([c.name,c.number])
 //SpreadsheetApp.getActive().appendRow([c.name,c.number])
 
 }
-console.log(data)
+
 
 })
 
